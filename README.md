@@ -1,4 +1,4 @@
-# george-skills
+# agent-skills
 
 My personal Claude Code agent skills.
 
@@ -9,6 +9,6 @@ My personal Claude Code agent skills.
 ## Installation
 
 ```
-/plugin marketplace add GeorgeNance/george-skills
+/plugin marketplace add GeorgeNance/agent-skills
 /plugin install george-skills@george-skills
 ```
