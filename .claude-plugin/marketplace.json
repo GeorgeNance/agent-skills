@@ -5,8 +5,8 @@
   },
   "plugins": [
     {
-      "name": "george-skills",
-      "source": "./plugins/george-skills",
+      "name": "shortcuts",
+      "source": "./plugins/shortcuts",
       "description": "My personal agent skills",
       "version": "1.0.0"
     }

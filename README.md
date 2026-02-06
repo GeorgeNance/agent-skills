@@ -10,5 +10,5 @@ My personal Claude Code agent skills.
 
 ```
 /plugin marketplace add GeorgeNance/agent-skills
-/plugin install george-skills@george-skills
+/plugin install shortcuts@george-skills
 ```
