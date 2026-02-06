@@ -1,0 +1,14 @@
+{
+  "name": "george-skills",
+  "owner": {
+    "name": "George Nance"
+  },
+  "plugins": [
+    {
+      "name": "george-skills",
+      "source": "./plugins/george-skills",
+      "description": "My personal agent skills",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -9,5 +9,6 @@ My personal Claude Code agent skills.
 ## Installation
 
 ```
-/plugin install george-skills
+/plugin marketplace add GeorgeNance/george-skills
+/plugin install george-skills@george-skills
 ```
