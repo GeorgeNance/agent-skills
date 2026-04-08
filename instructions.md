@@ -21,9 +21,10 @@ Goal: install the local `devflows` plugin and the Codex custom agent for the cur
 Goal: install the `devflows` plugin from the marketplace in Claude Code.
 
 1. In Claude Code, run `/plugin marketplace add GeorgeNance/agent-skills`.
-2. Run `/plugin install devflows@george-skills`.
-3. After installation, tell the user the plugin is available under the `devflows` namespace.
-4. If the plugin was already installed or the user is testing local changes, use `/reload-plugins`.
+2. Run `/plugin marketplace update george-skills` to refresh the locally cached marketplace metadata before installation.
+3. Run `/plugin install devflows@george-skills`.
+4. After installation, tell the user the plugin is available under the `devflows` namespace.
+5. If the plugin was already installed or the user is testing local changes, use `/reload-plugins`.
 
 ## Response Style
 

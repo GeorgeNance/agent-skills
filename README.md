@@ -27,7 +27,7 @@ Follow the setup instructions in this file exactly and complete the setup end to
 
 https://raw.githubusercontent.com/GeorgeNance/agent-skills/refs/heads/master/instructions.md
 
-Use the `Claude Code` section. When you're done, briefly confirm exactly what was installed.
+Use the `Claude Code` section. Make sure you refresh the marketplace metadata before installing. When you're done, briefly confirm exactly what was installed.
 ```
 
 ## Codex
