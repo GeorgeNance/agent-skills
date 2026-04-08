@@ -10,13 +10,9 @@ My personal developer workflows, packaged for both Claude Code and Codex.
 
 ## Agents
 
-- **Claude plugin agent:** `code-simplifier` at `plugins/devflows/agents/code-simplifier.md`
 - **Codex custom agent:** `devflows_code_simplifier` at `.codex/agents/devflows_code_simplifier.toml`
 
-The cleanup workflow is split by platform:
-
-- Claude Code supports plugin-packaged agents, so the repo includes a Claude agent.
-- Codex supports custom agents via `.codex/agents/`, not as plugin-packaged agents, so the repo includes a project-scoped Codex custom agent plus the plugin skill.
+The cleanup workflow uses a project-scoped Codex custom agent plus the plugin skill.
 
 ## Claude Code
 
