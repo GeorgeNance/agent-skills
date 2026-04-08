@@ -20,8 +20,24 @@ The cleanup workflow is split by platform:
 
 ## Claude Code
 
-For Claude Code setup, tell Claude to follow [instructions.md](/Users/georgenance/Projects/agent-skills/instructions.md) and use the `Claude Code` section.
+Paste this into Claude Code:
+
+```text
+Follow the setup instructions in this file exactly and complete the setup end to end:
+
+https://raw.githubusercontent.com/GeorgeNance/agent-skills/refs/heads/master/instructions.md
+
+Use the `Claude Code` section. When you're done, briefly confirm exactly what was installed.
+```
 
 ## Codex
 
-For Codex setup, tell Codex to follow [instructions.md](/Users/georgenance/Projects/agent-skills/instructions.md) and use the `Codex` section.
+Paste this into Codex:
+
+```text
+Follow the setup instructions in this file exactly and complete the setup end to end:
+
+https://raw.githubusercontent.com/GeorgeNance/agent-skills/refs/heads/master/instructions.md
+
+Use the `Codex` section. If a command needs approval because it writes to my home directory, request approval and continue. When you're done, briefly confirm exactly what was installed.
+```
