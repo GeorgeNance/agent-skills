@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "shortcuts",
+      "name": "devflows",
       "source": {
         "source": "local",
-        "path": "./plugins/shortcuts"
+        "path": "./plugins/devflows"
       },
       "policy": {
         "installation": "AVAILABLE",

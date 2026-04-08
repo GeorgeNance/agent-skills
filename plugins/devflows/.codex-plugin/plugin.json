@@ -1,0 +1,30 @@
+{
+  "name": "devflows",
+  "version": "0.1.0",
+  "description": "Reusable developer workflows for git publishing, Obsidian wiki lookup, and cleanup reviews.",
+  "author": {
+    "name": "George Nance",
+    "url": "https://github.com/GeorgeNance"
+  },
+  "homepage": "https://github.com/GeorgeNance/agent-skills",
+  "repository": "https://github.com/GeorgeNance/agent-skills",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Devflows",
+    "shortDescription": "Reusable workflows for git, wiki, and review cleanup tasks.",
+    "longDescription": "Reusable developer workflows for fast commit-and-push flows, Obsidian wiki search and reading, and cleanup reviews for active diffs from Codex.",
+    "developerName": "George Nance",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Yeet the current repo changes with a commit message.",
+      "Search the Obsidian wiki for notes about bulk enrollment.",
+      "Read a wiki article and summarize the relevant context.",
+      "Review the current diff for duplication, code quality, and efficiency issues, then clean it up."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "devflows",
+  "description": "Developer workflows for git publishing, Obsidian wiki lookup, and code cleanup.",
+  "version": "1.0.0",
+  "author": {
+    "name": "George Nance"
+  }
+}

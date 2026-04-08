@@ -4,7 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-PLUGIN_SOURCE="${REPO_ROOT}/plugins/shortcuts"
+PLUGIN_SOURCE="${REPO_ROOT}/plugins/devflows"
+AGENT_INSTALL_SCRIPT="${SCRIPT_DIR}/install-codex-agent.sh"
 HOME_DIR="${HOME}"
 MARKETPLACE_PATH="${HOME_DIR}/.agents/plugins/marketplace.json"
 CONFIG_PATH="${HOME_DIR}/.codex/config.toml"
@@ -12,6 +13,11 @@ RULES_PATH="${HOME_DIR}/.codex/rules/default.rules"
 
 if [[ ! -d "${PLUGIN_SOURCE}" ]]; then
   echo "Missing plugin source at ${PLUGIN_SOURCE}" >&2
+  exit 1
+fi
+
+if [[ ! -f "${AGENT_INSTALL_SCRIPT}" ]]; then
+  echo "Missing Codex agent install script at ${AGENT_INSTALL_SCRIPT}" >&2
   exit 1
 fi
 
@@ -62,7 +68,7 @@ if not isinstance(plugins, list):
     raise SystemExit("Existing marketplace.json field 'plugins' must be an array.")
 
 entry = {
-    "name": "shortcuts",
+    "name": "devflows",
     "source": {
         "source": "local",
         "path": plugin_source_rel,
@@ -75,7 +81,7 @@ entry = {
 }
 
 for index, existing in enumerate(plugins):
-    if isinstance(existing, dict) and existing.get("name") == "shortcuts":
+    if isinstance(existing, dict) and existing.get("name") == "devflows":
         plugins[index] = entry
         break
 else:
@@ -87,7 +93,7 @@ print(payload["name"])
 PY
 )"
 
-CACHE_PATH="${HOME_DIR}/.codex/plugins/cache/${MARKETPLACE_NAME}/shortcuts/local"
+CACHE_PATH="${HOME_DIR}/.codex/plugins/cache/${MARKETPLACE_NAME}/devflows/local"
 mkdir -p "${CACHE_PATH}"
 cp -R "${PLUGIN_SOURCE}/." "${CACHE_PATH}/"
 
@@ -99,7 +105,7 @@ from pathlib import Path
 
 config_path = Path(os.environ["CONFIG_PATH"])
 marketplace_name = os.environ["MARKETPLACE_NAME"]
-plugin_key = f'shortcuts@{marketplace_name}'
+plugin_key = f'devflows@{marketplace_name}'
 section_header = f'[plugins."{plugin_key}"]'
 
 text = config_path.read_text() if config_path.exists() else ""
@@ -156,7 +162,9 @@ for script_root in script_roots:
 rules_path.write_text("\n".join(lines).rstrip() + "\n")
 PY
 
-echo "Installed shortcuts@${MARKETPLACE_NAME}"
+"${AGENT_INSTALL_SCRIPT}"
+
+echo "Installed devflows@${MARKETPLACE_NAME}"
 echo "Marketplace: ${MARKETPLACE_PATH}"
 echo "Cache: ${CACHE_PATH}"
 echo "Rules: ${RULES_PATH}"
