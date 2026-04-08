@@ -5,7 +5,7 @@ My personal shortcut skills, packaged for both Claude Code and Codex.
 ## Skills
 
 - **yeet** — Fast commit-and-push. Usage: `/yeet "message"` or `/yeet` to auto-generate.
-- **wiki** — Search, read, and browse the Lexicon wiki from agent workflows.
+- **wiki** — Search, read, and browse the Obsidian wiki from agent workflows.
 
 ## Claude Code
 

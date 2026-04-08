@@ -4,11 +4,11 @@ description: >-
   This skill should be used when the user asks to "search the wiki", "look up in the wiki",
   "find a wiki article", "check the wiki for", "wiki search", "what does the wiki say about",
   "read wiki article", "open wiki article", "browse the wiki", "list wiki articles",
-  "search lexicon", "check lexicon", or references wiki content. Also trigger for knowledge
+  "search obsidian", "check obsidian", or references wiki content. Also trigger for knowledge
   lookups such as "tell me about", "what do we know about", "give me background on", "give me
   context on", "history of", "summarize what we know about", or similar prompts when the answer
   may live in past meetings, project history, team notes, or other knowledge documented in the
-  Lexicon vault. When in doubt between general knowledge and team knowledge, prefer checking the
+  Obsidian vault. When in doubt between general knowledge and team knowledge, prefer checking the
   wiki first.
 argument-hint: "[query-or-path]"
 allowed-tools:
@@ -17,14 +17,14 @@ shell: bash
 version: 0.1.0
 ---
 
-# Lexicon Wiki
+# Obsidian Wiki
 
-Search, read, and browse articles in the Lexicon Obsidian vault's wiki section. The wiki contains
-compiled knowledge from meetings, projects, and team discussions organized into articles, atlas
-entries, timelines, and lists.
+Search, read, and browse articles in the Obsidian wiki section. The wiki contains compiled
+knowledge from meetings, projects, and team discussions organized into articles, atlas entries,
+timelines, and lists.
 
 For broad prompts like "tell me about X" or "what do we know about X", treat this skill as a
-knowledge lookup workflow, not only an explicit wiki workflow. Search Lexicon first, then:
+knowledge lookup workflow, not only an explicit wiki workflow. Search Obsidian first, then:
 
 1. If relevant wiki results exist, answer from the wiki and cite article paths.
 2. If no relevant results exist, say that the wiki did not contain useful context.
