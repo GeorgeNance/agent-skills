@@ -4,6 +4,15 @@ This file is written for an AI coding assistant to follow directly when a user w
 
 Choose the platform that matches the user's request and complete the steps end to end.
 
+## Agent Skills CLI
+
+Goal: install the skills with the portable Agent Skills CLI so they can be updated later.
+
+1. Run `npx skills add GeorgeNance/agent-skills --list` to confirm the package is discoverable.
+2. Run `npx skills add GeorgeNance/agent-skills -g -a codex --skill '*' -y`.
+3. To update an existing global install later, run `npx skills update -g -y`.
+4. If the user is testing local checkout changes instead of the GitHub version, run `npx skills add . --list` from the repo root.
+
 ## Codex
 
 Goal: install the local `devflows` plugin and the Codex custom agent for the current user.

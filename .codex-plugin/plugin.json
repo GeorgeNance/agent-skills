@@ -1,0 +1,29 @@
+{
+  "name": "devflows",
+  "version": "0.1.0",
+  "description": "Reusable developer workflows for git publishing and cleanup reviews.",
+  "author": {
+    "name": "George Nance",
+    "url": "https://github.com/GeorgeNance"
+  },
+  "homepage": "https://github.com/GeorgeNance/agent-skills",
+  "repository": "https://github.com/GeorgeNance/agent-skills",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Devflows",
+    "shortDescription": "Reusable workflows for git and review cleanup tasks.",
+    "longDescription": "Reusable developer workflows for fast commit-and-push flows, strict maintainability reviews, and cleanup reviews for active diffs from Codex.",
+    "developerName": "George Nance",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Yeet the current repo changes with a commit message.",
+      "Review the current diff for duplication, code quality, and efficiency issues, then clean it up.",
+      "Run a super review on the current branch."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

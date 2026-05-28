@@ -8,7 +8,7 @@
       "name": "devflows",
       "source": {
         "source": "local",
-        "path": "./plugins/devflows"
+        "path": "."
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -2,11 +2,36 @@
 
 My personal developer workflows, packaged for both Claude Code and Codex.
 
+The root `skills/` directory is the source of truth. The Claude Code and Codex
+plugin metadata at the repo root expose those skills under the `devflows`
+namespace.
+
 ## Skills
 
 - **yeet** — Fast commit-and-push. Usage: `/yeet "message"` or `/yeet` to auto-generate.
-- **wiki** — Search, read, and browse the Obsidian wiki from agent workflows.
 - **simplify-code-review-and-cleanup** — Review current changes for reuse, quality, and efficiency, then clean them up.
+- **super-review** — Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. Inspired by the concept of a "thermo-nuclear code quality review" https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md
+
+## Agent Skills CLI
+
+This repo can be installed directly with the Agent Skills CLI:
+
+```bash
+npx skills add GeorgeNance/agent-skills --list
+npx skills add GeorgeNance/agent-skills -g -a codex --skill '*' -y
+```
+
+Use the GitHub source when you want tracked updates:
+
+```bash
+npx skills update -g -y
+```
+
+For local development, validate the checkout before publishing changes:
+
+```bash
+npx skills add . --list
+```
 
 ## Agents
 

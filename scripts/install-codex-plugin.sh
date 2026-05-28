@@ -4,15 +4,21 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-PLUGIN_SOURCE="${REPO_ROOT}/plugins/devflows"
+PLUGIN_SOURCE="${REPO_ROOT}"
+SKILLS_SOURCE="${PLUGIN_SOURCE}/skills"
+CODEX_PLUGIN_MANIFEST="${PLUGIN_SOURCE}/.codex-plugin/plugin.json"
 AGENT_INSTALL_SCRIPT="${SCRIPT_DIR}/install-codex-agent.sh"
 HOME_DIR="${HOME}"
 MARKETPLACE_PATH="${HOME_DIR}/.agents/plugins/marketplace.json"
 CONFIG_PATH="${HOME_DIR}/.codex/config.toml"
-RULES_PATH="${HOME_DIR}/.codex/rules/default.rules"
 
-if [[ ! -d "${PLUGIN_SOURCE}" ]]; then
-  echo "Missing plugin source at ${PLUGIN_SOURCE}" >&2
+if [[ ! -d "${SKILLS_SOURCE}" ]]; then
+  echo "Missing skills source at ${SKILLS_SOURCE}" >&2
+  exit 1
+fi
+
+if [[ ! -f "${CODEX_PLUGIN_MANIFEST}" ]]; then
+  echo "Missing Codex plugin manifest at ${CODEX_PLUGIN_MANIFEST}" >&2
   exit 1
 fi
 
@@ -94,8 +100,9 @@ PY
 )"
 
 CACHE_PATH="${HOME_DIR}/.codex/plugins/cache/${MARKETPLACE_NAME}/devflows/local"
-mkdir -p "${CACHE_PATH}"
-cp -R "${PLUGIN_SOURCE}/." "${CACHE_PATH}/"
+mkdir -p "${CACHE_PATH}/.codex-plugin" "${CACHE_PATH}/skills"
+cp -R "${CODEX_PLUGIN_MANIFEST%/*}/." "${CACHE_PATH}/.codex-plugin/"
+cp -R "${SKILLS_SOURCE}/." "${CACHE_PATH}/skills/"
 
 export CONFIG_PATH MARKETPLACE_NAME
 python3 <<'PY'
@@ -129,42 +136,8 @@ else:
 config_path.write_text(text)
 PY
 
-export RULES_PATH PLUGIN_SOURCE CACHE_PATH
-python3 <<'PY'
-import os
-from pathlib import Path
-
-rules_path = Path(os.environ["RULES_PATH"])
-plugin_source = Path(os.environ["PLUGIN_SOURCE"])
-cache_path = Path(os.environ["CACHE_PATH"])
-
-script_roots = [
-    plugin_source / "skills" / "wiki" / "scripts",
-    cache_path / "skills" / "wiki" / "scripts",
-]
-script_names = [
-    "wiki-search.sh",
-    "wiki-read.sh",
-    "wiki-open.sh",
-    "wiki-list.sh",
-]
-
-rules_path.parent.mkdir(parents=True, exist_ok=True)
-existing = rules_path.read_text() if rules_path.exists() else ""
-lines = existing.splitlines()
-
-for script_root in script_roots:
-    for script_name in script_names:
-        pattern = f'prefix_rule(pattern=["bash", "{script_root / script_name}"], decision="allow")'
-        if pattern not in lines:
-            lines.append(pattern)
-
-rules_path.write_text("\n".join(lines).rstrip() + "\n")
-PY
-
 "${AGENT_INSTALL_SCRIPT}"
 
 echo "Installed devflows@${MARKETPLACE_NAME}"
 echo "Marketplace: ${MARKETPLACE_PATH}"
 echo "Cache: ${CACHE_PATH}"
-echo "Rules: ${RULES_PATH}"
