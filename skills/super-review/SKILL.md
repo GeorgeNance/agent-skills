@@ -30,11 +30,13 @@ Apply the baseline prompt above, plus these explicit review rules:
    - Assume there is often a "code judo" move available: a re-organization that uses the existing architecture more effectively and makes the change dramatically simpler and more elegant.
    - If you see a path to delete complexity rather than rearrange it, push hard for that path.
 
-1. **Do not let a PR push a file from under 1k lines to over 1k lines without a very strong reason.**
-   - Treat this as a strong code-quality smell by default.
-   - Prefer extracting helpers, subcomponents, modules, or local abstractions instead of letting a file sprawl past 1000 lines.
-   - If the diff crosses that threshold, explicitly ask whether the code should be decomposed first.
-   - Only waive this if there is a compelling structural reason and the resulting file is still clearly organized.
+1. **Treat files crossing 1k lines as a review signal, not an automatic verdict.**
+   - Treat non-component implementation files crossing that threshold as a strong code-quality smell by default.
+   - For Vue single-file components, do not be reflexively strict about the 1k-line boundary. Consider whether the component is still cohesive, whether the template/script/style sections are easy to scan, and whether splitting would actually improve ownership.
+   - Prefer extracting helpers, subcomponents, modules, or local abstractions when they reduce real complexity or isolate unrelated concerns.
+   - Prefer CSS that is matched with the component it styles. For Vue components, component-specific CSS can live in the same SFC via scoped styles, or in a clearly paired adjacent stylesheet when that is already the local convention.
+   - Do not force CSS extraction just to reduce line count if it separates tightly coupled component styling from the component and makes maintenance worse.
+   - If the diff crosses the threshold and the code feels less cohesive, explicitly ask whether decomposition would improve the design.
 
 2. **Do not allow random spaghetti growth in existing code.**
    - Be highly suspicious of new ad-hoc conditionals, scattered special cases, or one-off branches inserted into unrelated flows.
@@ -91,7 +93,8 @@ Escalate findings when you see:
 
 - A complicated implementation where a cleaner reframing could delete whole categories of complexity.
 - Refactors that move code around but fail to reduce the number of concepts a reader must hold in their head.
-- A file crossing 1000 lines due to the PR, especially if the new code could be split out.
+- A non-component implementation file crossing 1000 lines due to the PR, especially if the new code could be split out.
+- A Vue single-file component crossing 1000 lines only when the added code mixes unrelated concerns, makes the sections hard to scan, or would clearly be easier to maintain as focused subcomponents/helpers.
 - New conditionals bolted onto unrelated code paths.
 - One-off booleans, nullable modes, or flags that complicate existing control flow.
 - Feature-specific logic leaking into general-purpose modules.
@@ -140,7 +143,8 @@ If the implementation missed an opportunity for a dramatic simplification, say t
 
 Good phrases:
 
-- `this pushes the file past 1k lines. can we decompose this first?`
+- `this pushes a non-component file past 1k lines. can we decompose this first?`
+- `this Vue component is over 1k lines, but the line count alone is not the issue. the question is whether the template/script/style still belong together.`
 - `this adds another special-case branch into an already busy flow. can we move this behind its own abstraction?`
 - `this works, but it makes the surrounding code more spaghetti. let's keep the behavior and restructure the implementation.`
 - `this feels like feature logic leaking into a shared path. can we isolate it?`
@@ -182,7 +186,8 @@ The bar for approval is:
 Treat these as presumptive blockers unless the author can justify them clearly:
 
 - the PR preserves a lot of incidental complexity when there is a plausible code-judo move that would delete it
-- the PR pushes a file from below 1000 lines to above 1000 lines
+- the PR pushes a non-component implementation file from below 1000 lines to above 1000 lines without a strong structural reason
+- the PR pushes a Vue single-file component past 1000 lines while mixing unrelated concerns or splitting would clearly improve maintainability
 - the PR adds ad-hoc branching that makes an existing flow more tangled
 - the PR solves a local problem by scattering feature checks across shared code
 - the PR adds an unnecessary abstraction, wrapper, or cast-heavy contract that makes the design more indirect
